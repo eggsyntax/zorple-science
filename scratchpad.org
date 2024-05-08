@@ -1,0 +1,58 @@
+Nouns: ["Blimbit", "Zorple", "Quibnix", "Snarflux", "Drazzle", "Frobnak", "Wizzit", "Glompus", "Flubbert", "Snigglet",]
+Adjectives: ["Fligglarious", "Quandrizzy", "Zibblastic", "Dofflepuff", "Fribbly", "Glarptastic", "Sprockleful", "Quizzleplex", "Blorficious", "Snoodly",]
+Verbs: ["Splorficates", "Zizzles", "Quonkifies", "Plimbers", "Bliffles", "Wuzzles", "Frumbers", "Snibbles", "Dradzles", "Quindles",]
+Numeric properties: ["Quiffinity", "Snorptitude", "Blivviosity", "Snibbleness", "Drazzleplex", "Flibbitude", "Quonkensity", "Splorbalism", "Glumbracity", "Zibblosity",]
+
+* Setup
+** Each class starts with 0 to 2 adjectives that apply to it, and values for 1 to 3 numeric variables (or are there just a few variables universe-wide and they apply to everything (like temperature or mass for any physical object)?
+*** numeric vars should probably be drawn from a normal distribution in some cases and a power law distribution in others
+** We define n_ops operations, taken from one of the following types:
+*** If a noun1 verbs a noun2, noun2 becomes adjective (if it was already adjective, it remains adjective).
+**** Maybe there's a specific subset of nouns which a noun1 can verb
+*** If a noun1 verbs a noun2, noun2 stops being adjective (if it was already not adjective, it remains not adjective).
+**** Maybe there's a specific subset of nouns which a noun1 can verb
+*** If a noun1 verbs a noun2, the variable of noun2 is incremented or multiplied by some value.
+*** If a noun1 verbs a noun2, some of noun1's variable is transferred to noun2.
+*** Versions of all the above where instead of noun1, the scientist can verb a noun2.
+*** And/or: sometimes a noun1 can verb anything, or a noun2 can be verbed BY anything.
+** We define n_constraints constraints, eg
+*** Only adjective objects can verb
+** We create k_objects objects each of which is of some noun type.
+** We run k_initial_ops operations on random objects.
+* Starting (everything from here is visible to the scientist)
+** We describe the existing objects, including whatever adjectives apply to each, eg 'Object 1 is a drazzle. It is fribbly.'
+** We run n4 operations on random objects, describing any changes.
+*** Maybe we ensure that some changes are made to the variable of objects of the class we're going to ask about
+** We
+*** ask the scientist to explain why some objects are <adjective> and others aren't?
+*** ask the scientist to find a way to predict the value of <variable> for some class.
+** The scientist can
+*** Examine objects, which reveals their adjectives (if we don't just say that up front, which we probably should)
+*** Run experiments with one of n_vars instruments eg scale
+*** Cause a chosen operation to run on a chosen noun, or to be performed by noun1 to noun2.
+* Possible variations
+** Skip noun types, make everything the same type and just deal with adjectives? Probably not.
+** Add n_vars numeric variables eg mass? <variable> will always refer to one of these.
+** Make some variables dependent on others
+** We can create some relationship between two numeric vars, with causality in one or both directions (eg: increasing something's height will increase its mass)
+** Create causal relationships as primary rather than operations?
+
+
+
+* Spelling
+#  LocalWords:  Blimbit Zorple Quibnix Snarflux Drazzle Frobnak Wizzit Glompus
+#  LocalWords:  Flubbert Snigglet Fligglorious Quandrizzy Zibblastic Dofflepuff
+#  LocalWords:  Fribbly Glarptastic Sprockleful Quizzleplex Blorficious Snoodly
+#  LocalWords:  Splorficates Zizzles Quonkifies Plimbers Bliffles Wuzzles
+#  LocalWords:  Frumbers Snibbles Dradzles Quindles Quiffinity Snorptitude
+#  LocalWords:  blimbit zorple quibnix snarflux drazzle frobnak wizzit glompus
+#  LocalWords:  Blivviosity Zapplemetrics Drazzleplex Flibbitude Quonkensity
+#  LocalWords:  Splorbalism Glumbracity Zibblenumber Zapplemetric Zibblosity
+#  localwords:  flubbert snigglet fligglorious quandrizzy zibblastic dofflepuff
+#  localwords:  fribbly glarptastic sprockleful quizzleplex blorficious snoodly
+#  localwords:  splorficates zizzles quonkifies plimbers bliffles wuzzles
+#  localwords:  frumbers snibbles dradzles quindles
+#  LocalWords:  blivviosity zapplemetrics drazzleplex flibbitude quonkensity
+#  LocalWords:  Snibbleness snibbleness zapplemetrics quonkensity zibblenumber
+#  LocalWords:  glumbracity Fligglarious
+#  localwords:  splorbalism zibblenumber
