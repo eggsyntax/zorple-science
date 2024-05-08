@@ -1,0 +1,13 @@
+tl;dr
+
+Creates pocket universes containing various types of object. Objects can have qualities / adjectives (something like 'blue') and numeric properties / variables. There are verbs which can be applied by some object types to other object types; doing so can impact the recipient's qualities and properties.
+
+There are various other complications available, but the above is the core system. Note that all nouns / verbs / etc are nonsense words, in order to avoid the connotations for existing words.
+
+The idea of the project is to present such a pocket universe to a large language model, and have it play a scientist in that universe. It can run experiments in order to gather data; it can form and test hypotheses, and it can try to answer questions posed by us about the system.
+
+Why? I've seen a lot of debate about whether models can have original insights, or whether they really are just doing trivial synthesis on information in the utterly vast corpus of the training data. Taking this approach means the particular universe & its rules have never existed before running one of these experiments, and they disappear immediately afterward. So any insights the model achieves can be assumed to be original, since this particular universe can't be in the training data (or at least the chance it is is infinitesimal, and running multiple experiments with different universes makes it far less likely still.
+
+In order to correctly model the universe, the model must
+- Remember the types of objects and their characteristics and the verbs they can receive and perform: in short, it must build a world model.
+- Deduce the causal relations that characterize this universe [TODO why].
