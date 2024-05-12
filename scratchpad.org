@@ -6,6 +6,17 @@ Verbs: ["Splorficates", "Zizzles", "Quonkifies", "Plimbers", "Bliffles", "Wuzzle
 Numeric properties: ["Quiffinity", "Snorptitude", "Blivviosity", "Snibbleness", "Drazzleplex", "Flibbitude", "Quonkensity", "Splorbalism", "Glumbracity", "Zibblosity",]
 
 * Setup
+** The overall setup:
+*** One instance is the system manager; it can call functions in the python code that
+**** instantiate a system
+**** answer questions about parts of the system ('examine noun1')
+**** perform experiments on request & report results (experiment example: 'I will verb1 object1 with object2')
+**** TODO can it create or bring in more objects?
+*** The other instance is the scientist; it asks/tells the system manager to do things.
+*** The scientist is trying to figure out the answer to one or more questions about how the system works
+**** eg 'Why do some noun1s have higher variable1 than others?'
+**** or (higher-difficulty) 'Here is a class1. Predict its variable1ness.'
+**** or 'Find an equation that characterizes a class1's level of variable1.'
 ** Each class starts with 0 to 2 adjectives that apply to it, and values for 1 to 3 numeric variables (or are there just a few variables universe-wide and they apply to everything (like temperature or mass for any physical object)?
 *** numeric vars should probably be drawn from a normal distribution in some cases and a power law distribution in others
 ** We define n_ops operations, taken from one of the following types:
@@ -14,6 +25,7 @@ Numeric properties: ["Quiffinity", "Snorptitude", "Blivviosity", "Snibbleness", 
 *** If a noun1 verbs a noun2, noun2 stops being adjective (if it was already not adjective, it remains not adjective).
 **** Maybe there's a specific subset of nouns which a noun1 can verb
 *** If a noun1 verbs a noun2, the variable of noun2 is incremented or multiplied by some value.
+**** Probably need a NumericOp class
 *** If a noun1 verbs a noun2, some of noun1's variable is transferred to noun2.
 *** Versions of all the above where instead of noun1, the scientist can verb a noun2.
 *** And/or: sometimes a noun1 can verb anything, or a noun2 can be verbed BY anything.
@@ -38,10 +50,13 @@ Numeric properties: ["Quiffinity", "Snorptitude", "Blivviosity", "Snibbleness", 
 ** Make some variables dependent on others
 ** We can create some relationship between two numeric vars, with causality in one or both directions (eg: increasing something's height will increase its mass)
 ** Create causal relationships as primary rather than operations?
+* Names
+Nouns: ["Blimbit", "Zorple", "Quibnix", "Snarflux", "Drazzle", "Frobnak", "Wizzit", "Glompus", "Flubbert", "Snigglet",]
+Adjectives: ["Fligglarious", "Quandrizzy", "Zibblastic", "Dofflepuff", "Fribbly", "Glarptastic", "Sprockleful", "Quizzleplex", "Blorficious", "Snoodly",]
+Verbs: ["Splorficates", "Zizzles", "Quonkifies", "Plimbers", "Bliffles", "Wuzzles", "Frumbers", "Snibbles", "Dradzles", "Quindles",]
+Numeric properties: ["Quiffinity", "Snorptitude", "Blivviosity", "Snibbleness", "Drazzleplex", "Flibbitude", "Quonkensity", "Splorbalism", "Glumbracity", "Zibblosity",]
 
-
-
-* Spelling
+* Spelling (for emacs)
 #  LocalWords:  Blimbit Zorple Quibnix Snarflux Drazzle Frobnak Wizzit Glompus
 #  LocalWords:  Flubbert Snigglet Fligglorious Quandrizzy Zibblastic Dofflepuff
 #  LocalWords:  Fribbly Glarptastic Sprockleful Quizzleplex Blorficious Snoodly
@@ -56,5 +71,5 @@ Numeric properties: ["Quiffinity", "Snorptitude", "Blivviosity", "Snibbleness", 
 #  localwords:  frumbers snibbles dradzles quindles
 #  LocalWords:  blivviosity zapplemetrics drazzleplex flibbitude quonkensity
 #  LocalWords:  Snibbleness snibbleness zapplemetrics quonkensity zibblenumber
-#  LocalWords:  glumbracity Fligglarious
+#  LocalWords:  glumbracity Fligglarious NumericOp
 #  localwords:  splorbalism zibblenumber
