@@ -1,3 +1,5 @@
+[This is just pasted in from a local org-mode file, hence the crappy formatting]
+
 Nouns: ["Blimbit", "Zorple", "Quibnix", "Snarflux", "Drazzle", "Frobnak", "Wizzit", "Glompus", "Flubbert", "Snigglet",]
 Adjectives: ["Fligglarious", "Quandrizzy", "Zibblastic", "Dofflepuff", "Fribbly", "Glarptastic", "Sprockleful", "Quizzleplex", "Blorficious", "Snoodly",]
 Verbs: ["Splorficates", "Zizzles", "Quonkifies", "Plimbers", "Bliffles", "Wuzzles", "Frumbers", "Snibbles", "Dradzles", "Quindles",]
