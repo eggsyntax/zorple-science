@@ -17,4 +17,6 @@ In order to correctly model the universe, the model must
 - Ensure you have numpy in your environment, or create a conda environment from the config with `conda env create -f environment.yml`.
 - `python system.py` will open a Python REPL in the context of the system. You can do `system = run()` to generate a system and print the initial prompt to the model, including a list of available objects. You can then try out the module's various functions on that system.
 
+scratchpad.org has some other scattered notes on the design.
+
 Be aware that this is very much a WIP!
