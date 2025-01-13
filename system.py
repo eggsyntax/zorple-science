@@ -87,12 +87,14 @@ def create_object(clazz):
     return obj
 
 def run_initial_operations(system, n):
+    print('\nRunning initial operations:')
     objects = system['objects']
     ops = system['ops']
     for _ in range(n):
         obj = random.choice(objects)
         op = random.choice(ops)
         apply_operation(system, obj, op)
+    print()
 
 def print_object(obj):
     adjectives = obj['adjectives']
@@ -103,6 +105,7 @@ def print_object(obj):
 
 def print_objects(system):
     for obj in system['objects']:
+        print_object(obj)
         print_object(obj)
 
 def some_objects(system, n=5): # XXX
@@ -118,7 +121,7 @@ def random_variable(classes):
 def setup_string(system):
     verbs = [op['name'] for op in system['ops']]
     verb_strings = [f'You can {verb} objects.' for verb in verbs]
-    s = (f'You are a talented scientist. You have begun to study a brand new field of science, and it is your task to ' 
+    s = (f'You are a talented scientist. You have begun to study a brand new field of science, and it is your task to '
          f'understand the sorts of things in this field and characterize their properties. You have a number of objects '
         #  f'available to study. You can perform experiments on these objects to learn more about them. The experiments '
          f'available to study. You can perform experiments on these objects to learn more about them. The experiments you can perform are as follows: {' '.join(verb_strings)}. '
@@ -139,7 +142,7 @@ def setup_system():
     return system
 
 ### TODO TODO TODO YOUAREHERE
-# This will probably work better (at least for viewability) if I output the info as a spreadsheet 
+# This will probably work better (at least for viewability) if I output the info as a spreadsheet
 # rather than English sentences! Ideally still in text format, though.
 
 # TODO constraints / rules
