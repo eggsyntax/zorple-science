@@ -1,0 +1,6 @@
+name: zorple
+channels:
+  - defaults
+dependencies:
+  - numpy
+prefix: /opt/homebrew/anaconda3/envs/zorple
