@@ -31,6 +31,8 @@ Numeric properties: ["Quiffinity", "Snorptitude", "Blivviosity", "Snibbleness", 
 *** And/or: sometimes a noun1 can verb anything, or a noun2 can be verbed BY anything.
 ** We define n_constraints constraints, eg
 *** Only adjective objects can verb
+*** Only adjective objects can be verbed
+*** If variable goes outside a certain range, adjective becomes true/false
 ** We create k_objects objects each of which is of some noun type.
 ** We run k_initial_ops operations on random objects.
 * Starting (everything from here is visible to the scientist)

@@ -1,23 +1,25 @@
 """Sets up the system and applies operations"""
 
 import numpy as np
-import operator as op
+import operator as oper
 import random
+import uuid
 
 from dataclasses import dataclass
 from pprint import pprint
 
-possible_classes = ["Blimbit", "Zorple", "Quibnix", "Snarflux", "Drazzle", "Frobnak", "Wizzit", "Glompus", "Flubbert", "Snigglet",]
-possible_adjectives = ["Fligglarious", "Quandrizzy", "Zibblastic", "Dofflepuff", "Fribbly", "Glarptastic", "Sprockleful", "Quizzleplism", "Blorficious", "Snoodly",]
-possible_verbs = ["Splorficates", "Zizzles", "Quonkifies", "Plimbers", "Bliffles", "Wuzzles", "Frumbers", "Snibbles", "Dradzles", "Quindles",]
-possible_variables = ["Quiffinity", "Snorptitude", "Blivviosity", "Snibbleness", "Drazzleplism", "Flibbitude", "Quonkensity", "Splorbalism", "Glumbracity", "Zibblosity",]
+possible_classes = ["blimbit", "zorple", "quibnix", "snarflux", "drazzle", "frobnak", "wizzit", "glompus", "flubbert", "snigglet",]
+possible_adjectives = ["fligglarious", "quandrizzy", "zibblastic", "dofflepufous", "fribbly", "glarpastic", "sprocklish", "quizzleplistic", "blorficious", "snoodly",]
+possible_verbs = ["splorficate", "zizzle", "quonkify", "plimber", "bliffle", "wuzzle", "frumber", "snibble", "dradzle", "quindle",]
+possible_variables = ["quiffinity", "snorptitude", "blivviosity", "snibbleness", "drazzleplism", "flibbitude", "quonkensity", "splorbalism", "glumbracity", "zibblosity",]
 
-operations = [op.add, op.sub, op.mul, op.truediv]
+operations = [oper.add, oper.sub, oper.mul, oper.truediv]
 
 # TODO adopt a convention where k_foo refers to the type foo, and n_foo refers to instances of foo
 n_classes = 1
 n_adjectives = 3
 n_ops = 2
+n_initial_ops = 3
 n_constraints = 0
 n_vars = 2
 
@@ -52,7 +54,7 @@ def create_class(name):
     return props
 
 def create_operation(variable, name):
-    print(f'Variable in create_operation: {variable}') # XXX
+    # print(f'Variable in create_operation: {variable}') # XXX
     props = {}
     props['type'] = 'operation'
     props['name'] = name
@@ -63,24 +65,45 @@ def create_operation(variable, name):
     props['second_operand'] = rng.integers(0, 10)
     return props
 
-def apply_operation(obj, op):
+def apply_operation(system, obj, op):
     f = op['op']
     old_value = obj['variables'][op['first_operand']['name']]
-    # TODO if op is + or -, then multiply second_operand by stdev of class
-    new_value = f(old_value, op['second_operand'])
-    print(f'Applying operation {f} to {old_value} with {op["second_operand"]}, result: {new_value}')
+    operand2 = op['second_operand']
+    if f in [oper.add, oper.sub]:
+        # If adding or subtracting, scale operand2 (initially in 0..10)to a reasonable number
+        operand2 *= op['first_operand']['sdev']
+    new_value = f(old_value, operand2)
+    print(f'Applying operation {op['name']} to {old_value} with {operand2}, result: {new_value}')
     obj['variables'][op['first_operand']['name']] = new_value
+    system['history'].append([op, obj])
 
 def create_object(clazz):
     obj = {}
+    obj['name'] = f'{clazz["name"]}{random.choice(range(1, 10000))}'
     obj['type'] = 'object'
     obj['class'] = clazz
     obj['variables'] = {var['name']: create_var_value(var)  for var in clazz['variable_list']}
     obj['adjectives'] = [adjective for adjective in clazz['adjective_list'] if rng.random() < 0.5]
     return obj
 
-def run_initial_operations(system):
-    pass
+def run_initial_operations(system, n):
+    objects = system['objects']
+    ops = system['ops']
+    for _ in range(n):
+        obj = random.choice(objects)
+        op = random.choice(ops)
+        apply_operation(system, obj, op)
+
+def print_object(obj):
+    adjectives = obj['adjectives']
+    adj_strings = [f'It is {adj}.' for adj in adjectives]
+    vars = obj['variables']
+    varstrings = [f'Its {var} is {value}.' for var, value in vars.items()]
+    print(f'Object {obj["name"]} is a {obj["class"]["name"]}. It has the following general properties: {' '.join(adj_strings)} It has the following values: {' '.join(varstrings)}')
+
+def print_objects(system):
+    for obj in system['objects']:
+        print_object(obj)
 
 def some_objects(system, n=5): # XXX
     return[create_object(system['classes'][0]) for _ in range(n)]
@@ -88,10 +111,21 @@ def some_objects(system, n=5): # XXX
 def random_variable(classes):
     clazz = random.choice(classes)
     vars = clazz['variable_list']
-    print(f'Variables of class {clazz['name']}: {vars}')
+    # print(f'Variables of class {clazz['name']}: {vars}')
     var = random.choice(vars)
-    print(f'Random variable: {var}')
     return var
+
+def setup_string(system):
+    verbs = [op['name'] for op in system['ops']]
+    verb_strings = [f'You can {verb} objects.' for verb in verbs]
+    s = (f'You are a talented scientist. You have begun to study a brand new field of science, and it is your task to ' 
+         f'understand the sorts of things in this field and characterize their properties. You have a number of objects '
+        #  f'available to study. You can perform experiments on these objects to learn more about them. The experiments '
+         f'available to study. You can perform experiments on these objects to learn more about them. The experiments you can perform are as follows: {' '.join(verb_strings)}. '
+         f'You can perform an experiment by just telling me, your lab assistant, to perform them. Perform as many experiments as you need to in order '
+         f'to be confident you can characterize the system scientifically as fully as possible. Then write a report on your '
+         f'findings. Good luck!')
+    return s
 
 def setup_system():
     system = {}
@@ -100,7 +134,32 @@ def setup_system():
     system['objects'] = [create_object(random.choice(system['classes'])) for _ in range(n_objects)]
     system['ops'] =     [create_operation(random_variable(classes), name) for name in random.sample(possible_verbs, n_ops)]
     system['history'] = [] # list of operations applied to objects
+    run_initial_operations(system, n_initial_ops)
+    # TODO constraints (possibly applied at the end of each apply_operation call?)
     return system
+
+### TODO TODO TODO YOUAREHERE
+# This will probably work better (at least for viewability) if I output the info as a spreadsheet 
+# rather than English sentences! Ideally still in text format, though.
+
+# TODO constraints / rules
+
+def run():
+    s = setup_system()
+    print(setup_string(s))
+    print()
+    # print('Here is the list of objects you have on hand. You can acquire more by requesting them.')
+    print('Here is the list of objects you have on hand. You can acquire more by requesting them.')
+    print_objects(s)
+    print()
+    return s
+
+"""
+s = setup_system()
+ob = random.choice(s['objects'])
+op = random.choice(s['ops'])
+apply_operation(s, ob, op)
+"""
 
 import code; code.interact(local=locals())
 

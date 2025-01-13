@@ -1,0 +1,15 @@
+Class: Snigglet
+Adjectives: ['Fligglarious', 'Sprockleful', 'Quizzleplism']
+Variables:
+  - Zibblosity, mean -38, std 16
+  - Quiffinity, mean -47, std 14
+Verbs:
+  - Splorficates, adds 6 * 14 to Quiffinity
+  - Dradzles, adds 6 * 14 to Quiffinity
+
+
+Plimbering adds 8 to Quiffinity
+Bliffling makes Sprockleful false
+
+If Sprockleful and not snoodly, glumbracity is 10x
+   Sprockleful
