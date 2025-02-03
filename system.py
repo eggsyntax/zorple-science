@@ -8,6 +8,7 @@ import uuid
 from dataclasses import dataclass
 from pprint import pprint
 
+# TODO replace nonsense names with generic name/number system.
 possible_classes = ["blimbit", "zorple", "quibnix", "snarflux", "drazzle", "frobnak", "wizzit", "glompus", "flubbert", "snigglet",]
 possible_adjectives = ["fligglarious", "quandrizzy", "zibblastic", "dofflepufous", "fribbly", "glarpastic", "sprocklish", "quizzleplistic", "blorficious", "snoodly",]
 possible_verbs = ["splorficate", "zizzle", "quonkify", "plimber", "bliffle", "wuzzle", "frumber", "snibble", "dradzle", "quindle",]
@@ -15,7 +16,7 @@ possible_variables = ["quiffinity", "snorptitude", "blivviosity", "snibbleness",
 
 operations = [oper.add, oper.sub, oper.mul, oper.truediv]
 
-# TODO adopt a convention where k_foo refers to the type foo, and n_foo refers to instances of foo
+# Convention: where k_foo refers to the type foo, and n_foo refers to instances of foo
 n_classes = 1
 n_adjectives = 3
 n_ops = 2
@@ -96,6 +97,7 @@ def run_initial_operations(system, n):
         apply_operation(system, obj, op)
     print()
 
+# TODO print objects as csv, not text.
 def print_object(obj):
     adjectives = obj['adjectives']
     adj_strings = [f'It is {adj}.' for adj in adjectives]
@@ -141,10 +143,6 @@ def setup_system():
     # TODO constraints (possibly applied at the end of each apply_operation call?)
     return system
 
-### TODO TODO TODO YOUAREHERE
-# This will probably work better (at least for viewability) if I output the info as a spreadsheet
-# rather than English sentences! Ideally still in text format, though.
-
 # TODO constraints / rules
 
 def run():
@@ -167,6 +165,7 @@ apply_operation(s, ob, op)
 import code; code.interact(local=locals())
 
 def spelling():
+    # (for emacs, ignore)
     # Spelling:
     #  LocalWords:  Blimbit Zorple Quibnix Snarflux Drazzle Frobnak Wizzit Glompus
     #  LocalWords:  Flubbert Snigglet Fligglorious Quandrizzy Zibblastic Dofflepuff
