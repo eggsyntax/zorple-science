@@ -14,6 +14,7 @@ possible_adjectives = ["fligglarious", "quandrizzy", "zibblastic", "dofflepufous
 possible_verbs = ["splorficate", "zizzle", "quonkify", "plimber", "bliffle", "wuzzle", "frumber", "snibble", "dradzle", "quindle",]
 possible_variables = ["quiffinity", "snorptitude", "blivviosity", "snibbleness", "drazzleplism", "flibbitude", "quonkensity", "splorbalism", "glumbracity", "zibblosity",]
 
+# TODO I think we'll certainly want to add more operations at some point
 operations = [oper.add, oper.sub, oper.mul, oper.truediv]
 
 # Convention: where k_foo refers to the type foo, and n_foo refers to instances of foo
