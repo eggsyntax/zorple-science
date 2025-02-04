@@ -17,7 +17,6 @@ possible_variables = ["quiffinity", "snorptitude", "blivviosity", "snibbleness",
 # TODO I think we'll certainly want to add more operations at some point
 operations = [oper.add, oper.sub, oper.mul, oper.truediv]
 
-# Convention: where k_foo refers to the type foo, and n_foo refers to instances of foo
 n_classes = 1
 n_adjectives = 3
 n_ops = 2
@@ -37,9 +36,6 @@ def create_variable(name):
     props['mean'] = (1 - rng.power(5)) * 100 - 50
     relative_std_dev = rng.uniform(0.0, 2.0)
     props['sdev'] = abs(props['mean'] * relative_std_dev)
-    # props['adjective_list'] = random.sample(possible_adjectives, n_adjectives)
-    # props['verb_list'] = random.sample(possible_verbs, n_ops)
-    # props['variable_list'] = random.sample(possible_variables, n_vars)
     return props
 
 def create_var_value(variable):
@@ -150,7 +146,6 @@ def run():
     s = setup_system()
     print(setup_string(s))
     print()
-    # print('Here is the list of objects you have on hand. You can acquire more by requesting them.')
     print('Here is the list of objects you have on hand. You can acquire more by requesting them.')
     print_objects(s)
     print()
