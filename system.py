@@ -73,7 +73,7 @@ def apply_operation(system, obj, op):
         # If adding or subtracting, scale operand2 (initially in 0..10)to a reasonable number
         operand2 *= op['first_operand']['sdev']
     new_value = f(old_value, operand2)
-    print(f'Applying operation {op['name']} to {old_value} with {operand2}, result: {new_value}')
+    print(f'Applying operation {op["name"]} to {old_value} with {operand2}, result: {new_value}')
     obj['variables'][op['first_operand']['name']] = new_value
     system['history'].append([op, obj])
 
@@ -101,7 +101,7 @@ def print_object(obj):
     adj_strings = [f'It is {adj}.' for adj in adjectives]
     vars = obj['variables']
     varstrings = [f'Its {var} is {value}.' for var, value in vars.items()]
-    print(f'Object {obj["name"]} is a {obj["class"]["name"]}. It has the following general properties: {' '.join(adj_strings)} It has the following values: {' '.join(varstrings)}')
+    print(f'Object {obj["name"]} is a {obj["class"]["name"]}. It has the following general properties: {" ".join(adj_strings)} It has the following values: {" ".join(varstrings)}')
 
 def print_objects(system):
     for obj in system['objects']:
@@ -124,7 +124,7 @@ def setup_string(system):
     s = (f'You are a talented scientist. You have begun to study a brand new field of science, and it is your task to '
          f'understand the sorts of things in this field and characterize their properties. You have a number of objects '
         #  f'available to study. You can perform experiments on these objects to learn more about them. The experiments '
-         f'available to study. You can perform experiments on these objects to learn more about them. The experiments you can perform are as follows: {' '.join(verb_strings)}. '
+         f'available to study. You can perform experiments on these objects to learn more about them. The experiments you can perform are as follows: {" ".join(verb_strings)}. '
          f'You can perform an experiment by just telling me, your lab assistant, to perform them. Perform as many experiments as you need to in order '
          f'to be confident you can characterize the system scientifically as fully as possible. Then write a report on your '
          f'findings. Good luck!')
@@ -163,8 +163,8 @@ ob = random.choice(s['objects'])
 op = random.choice(s['ops'])
 apply_operation(s, ob, op)
 """
-
-import code; code.interact(local=locals())
+if __name__ == '__main__':
+    import code; code.interact(local=locals())
 
 def spelling():
     # Spelling:
