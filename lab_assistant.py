@@ -1,11 +1,28 @@
+import re
+import json
 from system import apply_operation, setup_system
 
 def parse_llm_output(output_string):
     '''
     parses the output string and create a list of experiments to be done.
+    LLM is instructed to follow the format specified in setup_string_v2() in system.py
     '''
+    def find_all_matches(pattern, string, group=0):
+        pat = re.compile(pattern)
+        pos = 0
+        out = []
+        m = pat.search(string, pos)
+        while m:
+            pos = m.start() + 1
+            out.append(m[group])
+            m = pat.search(string, pos)
+        return out
+    
+    pattern = r"{\"obj_name\": \"[a-zA-Z0-9]*\", \"op_name\": \"[a-zA-Z]*\"}"
+    exp_list = find_all_matches(pattern, output_string)
+    exp_list = [json.loads(exp) for exp in exp_list]
 
-    exp_list = [{'obj_name':'snigglet7579', 'op_name':'wuzzle'}]
+    # exp_list = [{'obj_name':'snigglet7579', 'op_name':'wuzzle'}]
     return exp_list
 
 def run_experiments(system, experiment_list):
@@ -67,8 +84,7 @@ def format_experiment_outputs(outcomes):
 
 def lab_assistant(system, llm_output):
 
-    # exp_list = parse_llm_output(llm_output)
-    exp_list = [{'obj_name':system['objects'][0]['name'], 'op_name':system['ops'][0]['name']}] #Temporarily hardcoded experiment
+    exp_list = parse_llm_output(llm_output)
     print('Experiment list', exp_list)
 
     outcomes, _ = run_experiments(system, exp_list)
@@ -79,7 +95,9 @@ def lab_assistant(system, llm_output):
 
 def run():
     system = setup_system()
-    outcome_str = lab_assistant(system, 'blah blah')
+    # print(system['objects'])
+    llm_output =  """Let me try these experiments! \n {"obj_name": "snigglet7579", "op_name": "wuzzle"}, {"obj_name": "snigglet564", "op_name": "splorficate"}"""
+    outcome_str = lab_assistant(system, llm_output)
     print(outcome_str)
 
 

@@ -129,6 +129,27 @@ def setup_string(system):
          f'findings. Good luck!')
     return s
 
+def setup_string_v2(system):
+    verbs = [op['name'] for op in system['ops']]
+    verb_strings = [f'{i+1}. {verb}: You can {verb} objects.' for i,verb in enumerate(verbs)]  
+    verb_strings = '\n'+'\n'.join(verb_strings)+'\n'
+    format = '{ind}. {verb}: {{"obj_name": "<object name>", "op_name":"{verb}"}}'
+    exp_formats = [format.format(ind=i+1, verb=verb) for i,verb in enumerate(verbs)]
+    exp_formats = '\n'+'\n'.join(exp_formats)+'\n'
+        
+    s = (f'You are a talented scientist. You have begun to study a brand new field of science, and it is your task to '
+         f'understand the sorts of things in this field and characterize their properties. You have a number of objects '
+        #  f'available to study. You can perform experiments on these objects to learn more about them. The experiments '
+         f'available to study. You can perform experiments on these objects to learn more about them. The experiments you can perform are as follows:'
+         f'{verb_strings}'
+         f'You can perform an experiment by just telling me, your lab assistant, to perform them. '
+         f'You can request any experiment in the following JSON format:'
+         f'{exp_formats}'
+         f'Perform as many experiments as you need to in order '
+         f'to be confident you can characterize the system scientifically as fully as possible. Then write a report on your '
+         f'findings. Good luck!')
+    return s
+
 def setup_system():
     system = {}
     classes = [create_class(name) for name in random.sample(possible_classes, n_classes)]
@@ -144,7 +165,7 @@ def setup_system():
 
 def run():
     s = setup_system()
-    print(setup_string(s))
+    print(setup_string_v2(s))
     print()
     print('Here is the list of objects you have on hand. You can acquire more by requesting them.')
     print_objects(s)
