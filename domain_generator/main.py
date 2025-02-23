@@ -1,4 +1,4 @@
-from system import setup_system, print_objects, apply_operations
+from domain_generator.system import setup_system, print_objects, apply_operations
 
 def main():
     system = setup_system(num_types=2, num_objects=4, num_operations=10)

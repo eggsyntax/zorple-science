@@ -1,4 +1,4 @@
-from config import rng
+from domain_generator.config import rng
 
 # Global counters to guarantee names are unique
 global_counters = {

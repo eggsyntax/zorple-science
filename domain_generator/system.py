@@ -1,8 +1,9 @@
-from entities import create_type, create_object
-from operations import create_operation, apply_operation
-from config import rng
+from domain_generator.entities import create_type, create_object
+from domain_generator.operations import create_operation, apply_operation
+from domain_generator.config import rng
 import numpy as np
-from pprint import pprint
+import pprint
+# from pprint import pprint
 
 def setup_system(num_types, num_objects, num_operations):
     """Generates a full domain with types, objects, and operations."""
@@ -41,15 +42,29 @@ def setup_system(num_types, num_objects, num_operations):
 
 def print_objects(system):
     """Pretty-prints all objects in the system."""
-    print("\n=== Objects in System ===\n")
+
+    string = "\n=== Objects in System ===\n"
     for obj in system['objects']:
         obj_info = {
             'name': obj['name'],
             'type': obj['type']['name'],
             'properties': obj['properties']
         }
-        pprint(obj_info)
-        print("\n" + "-" * 40 + "\n")
+        string += pprint.pformat(obj_info, indent=4)
+        string += "\n" + "-" * 40 + "\n"
+    # print(string)
+    return string
+
+
+    # print("\n=== Objects in System ===\n")
+    # for obj in system['objects']:
+    #     obj_info = {
+    #         'name': obj['name'],
+    #         'type': obj['type']['name'],
+    #         'properties': obj['properties']
+    #     }
+    #     pprint(obj_info)
+    #     print("\n" + "-" * 40 + "\n")
 
 def apply_operations(system, num_ops_to_apply=None):
     """Applies a set number of operations to the objects in the system."""

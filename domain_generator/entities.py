@@ -1,6 +1,6 @@
 import numpy as np
-from naming import generate_name
-from config import rng
+from domain_generator.naming import generate_name
+from domain_generator.config import rng
 
 def create_property():
     """Defines a property structure without assigning a value."""

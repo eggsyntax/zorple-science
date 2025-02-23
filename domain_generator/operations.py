@@ -1,7 +1,7 @@
 import numpy as np
 import operator as oper
-from naming import generate_name
-from config import rng
+from domain_generator.naming import generate_name
+from domain_generator.config import rng
 
 # Define pools of allowed operations
 binary_numerical_operations = {
@@ -101,7 +101,7 @@ def apply_operation(system, obj1, op, obj2=None):
 
         if target_property not in obj1['properties']:
             print(f"Skipping {op['op_name']}: {obj1['name']} does not have property {target_property}.")
-            return
+            return -1
 
         old_value = obj1['properties'][target_property]
 
@@ -111,13 +111,13 @@ def apply_operation(system, obj1, op, obj2=None):
             return
         if op['op_name'] == "log" and old_value <= 0:
             print(f"Skipping {op['op_name']}: log of non-positive number is invalid.")
-            return
+            return -1
 
         try:
             new_value = f(old_value)
         except Exception as e:
             print(f"Error applying {op['op_name']} on {obj1['name']}: {e}")
-            return
+            return -1
 
         print(f'Applying {op["op_name"]} to {obj1["name"]}... '
               f'Result: property {target_property} changes from {old_value} to {new_value}')
@@ -130,24 +130,24 @@ def apply_operation(system, obj1, op, obj2=None):
 
         if obj2 is None or obj1 == obj2:
             print(f"Skipping {op['op_name']}: Binary operation requires two distinct objects.")
-            return
+            return -1
 
         if first_property not in obj1['properties'] or second_property not in obj2['properties']:
             print(f"Skipping {op['op_name']}: Missing required properties.")
-            return
+            return -1
 
         first_value = obj1['properties'][first_property]
         second_value = obj2['properties'][second_property]
 
         if op['op_name'] in ["truediv", "floordiv", "mod"] and second_value == 0:
             print(f"Skipping {op['op_name']}: Division or modulo by zero is undefined.")
-            return
+            return -1
 
         try:
             new_value = f(first_value, second_value)
         except Exception as e:
             print(f"Error applying {op['op_name']} on {obj1['name']} and {obj2['name']}: {e}")
-            return
+            return -1
 
         print(f'Applying {op["op_name"]} to {obj1["name"]} (property {first_property}) '
               f'and {obj2["name"]} (property {second_property})... '
@@ -157,4 +157,5 @@ def apply_operation(system, obj1, op, obj2=None):
 
     # Log operation in system history
     system['history'].append([op, obj1, obj2 if op['operation_type'] == "binary" else None])
+    return 1
 
